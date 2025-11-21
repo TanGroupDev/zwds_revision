@@ -1,5 +1,7 @@
-
-export const downloadReportAsWord = (content: string, filename: string = 'ZWDS_Analysis_Report.doc') => {
+export const downloadReportAsWord = (
+  content: string,
+  filename: string = "ZWDS_Analysis_Report.docx",
+) => {
   // Basic HTML wrapper for Word (MHTML/HTML approach compatible with Word)
   const preHtml = `
     <html xmlns:o='urn:schemas-microsoft-com:office:office' 
@@ -33,33 +35,33 @@ export const downloadReportAsWord = (content: string, filename: string = 'ZWDS_A
   htmlContent = htmlContent
     // Main Title (ZWDS MAP...)
     .replace(/^ZWDS MAP (.*$)/gm, "<h1>ZWDS MAP $1</h1>")
-    
+
     // Bold (**text**)
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
-    
+
     // Horizontal Rule (---)
     .replace(/^---$/gm, "<hr>")
-    
+
     // List Items (* text)
     // We convert these to div with indentation to mimic lists without worrying about nested <ul>/<li> structure complexity in regex
     .replace(/^\* (.*$)/gm, "<div class='list-item'>• $1</div>")
-    
+
     // Section Headers (e.g., 1. SELF (Diri))
     // Identifying lines that start with a bold number like "<b>1."
     .replace(/^(<b>\d+\..*?<\/b>.*$)/gm, "<div class='section-title'>$1</div>")
-    
+
     // Line breaks - Convert newlines to <br>
     .replace(/\n/g, "<br>");
 
   const fullHtml = preHtml + htmlContent + postHtml;
 
   // 3. Create Blob and Trigger Download
-  const blob = new Blob(['\ufeff', fullHtml], {
-    type: 'application/msword'
+  const blob = new Blob(["\ufeff", fullHtml], {
+    type: "application/msword",
   });
-  
+
   const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
   document.body.appendChild(link);
