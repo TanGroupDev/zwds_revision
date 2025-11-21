@@ -7,7 +7,7 @@ export const BACKGROUND_AREA_THRESHOLD = 0.85; // If box > 85% of image, likely 
 export const PLACEHOLDER_IMAGE = "https://picsum.photos/800/800";
 
 // Gemini Configuration
-export const GEMINI_MODEL = 'gemini-2.5-flash'; // Good for vision tasks
+export const GEMINI_MODEL = "gemini-2.5-flash"; // Good for vision tasks
 
 export const REPORT_PROMPT = `
 Halo Gemini.
@@ -32,5 +32,5 @@ Output dari step pembuatan rangkuman text ZWDS ini tidak boleh mengandung conver
 
 Output harus dijabarkan dalam bahasa inggris.
 
-.doc friendly, sehingga mudah untuk dibaca.
+.docx friendly, sehingga mudah untuk dibaca.
 `;
